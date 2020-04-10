@@ -1,0 +1,35 @@
+%% Add paths
+addpath(genpath('.\Prajwal'));
+
+%% Read Catalogues
+REF_CAT = readmatrix('.\Prajwal\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
+
+%% Input from Feature Extraction
+c_img_ang_dst = [0.965803907409329;
+    0.940203807326885; 0.94307121139922;
+    
+    ]
+% set of input angular distances ( cos(theta) )
+
+%% Find
+TRUE_STAR_ID = [18686; 19013; 18386; 17947];
+
+TRUE = [429632,18686	19013	0.999719952559425
+
+        
+
+%% Search
+true = []
+for i = 1:6
+    ad = c_img_ang_dst(i);
+    [r, c] = find( REF_CAT == ad );
+    st_id1 = REF_CAT(r, 2); 
+    st_id2 = REF_CAT(r, 3);
+    
+    tmp = [r, st_id1, st_id2]
+    true = [true; tmp];
+    
+end
+    
+    
+
