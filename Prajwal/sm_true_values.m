@@ -2,7 +2,7 @@
 addpath(genpath('.\Prajwal'));
 
 %% Read Catalogues
-REF_CAT = readmatrix('.\Prajwal\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
+REF_CAT = readmatrix('.\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
 c_ANG_DST = REF_CAT(:,4); % Extract 'Angular distance' from Reference catalogue
 
 %% True Values
@@ -14,7 +14,6 @@ TRUE = [429632, 18686, 19013, 0.999719952559425;
         423077, 19013, 18386, 0.998859985155972;
         337399, 17947, 19013, 0.987236809197251;
         378234, 17947, 18386, 0.992827250569396;];    
-  
 
 %% Search
 check = [];
@@ -36,16 +35,22 @@ end
 disp(check == TRUE); 
 
 %% Check sm_gnrt_CSPA
+E = 2.22*1.0e-16; % Precision of the machine
+
+sz = size(REF_CAT); % Size of REF_CAT
+n_rw_RC = sz(1); % Number of star pairs (Number of rows - Reference catalogue)
+
 c_img_ang_dst = TRUE(:, 4);
-eps = 0.01; % Epsilon value
-m = ( max(c_ANG_DST) - min(c_ANG_DST) + 2*u ) / ( n_rw_RC - 1 );
-q = min(c_ANG_DST) - u - m ;
+eps = 0; % Epsilon value
+M = ( max(c_ANG_DST) - min(c_ANG_DST) + 2*E ) / ( n_rw_RC - 1 );
+Q = min(c_ANG_DST) - E - M ;
 
 check1 = zeros(1,6);
 for i = 1:6
-    [CSPA, start, stop] = sm_gnrt_CSPA(c_img_ang_dst(i), eps, q, m, REF_CAT);
+    [~, INDEX] = sm_gnrt_CSPA(c_img_ang_dst(i), eps, Q, M, REF_CAT);
     id = TRUE(i, 1);
-    if (start<=id) & (id<=stop) % Check if the True Star ID lies between the range predicted by CSPA
+    start = INDEX(1); stop = INDEX(2);
+    if (start<=id) && (id<=stop) % Check if the True Star ID lies between the range predicted by CSPA
         check1(i) = 1;
     end
 end
@@ -53,3 +58,9 @@ end
 %%%%%%%%%%%% range predicted by sm_gnrt_CSPA
 disp(check1);
 
+%% Miscellaneous Code
+
+cos_t = c_img_ang_dst(1);
+x_val = (cos_t - Q)/M;
+k_val = int64(x_val);
+[CSPA, INDEX] = sm_gnrt_CSPA(cos_t, 0, Q, M, REF_CAT);
