@@ -21,9 +21,7 @@ function  [CSPA, INDEX] = sm_gnrt_CSPA(ang_dst, eps, Q, M, REF_CAT)
     %     The possible Star ID matches for given angular distance
     % INDEX: (1,2) - matrix
     %     The start and stop indices of possible matches generated for given angular distance
-    %% Add paths
-    addpath(genpath('.\Prajwal'));
-
+    
     K_VEC = REF_CAT(:, 5); % Extract K-Vector from Reference catalogue
 
     %% Calculate constants

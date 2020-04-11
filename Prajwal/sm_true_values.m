@@ -2,7 +2,7 @@
 addpath(genpath('.\Prajwal'));
 
 %% Read Catalogues
-REF_CAT = readmatrix('.\Prajwal\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
+REF_CAT = readmatrix('.\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
 c_ANG_DST = REF_CAT(:,4); % Extract 'Angular distance' from Reference catalogue
 
 %% True Values
@@ -63,4 +63,4 @@ disp(check1);
 cos_t = c_img_ang_dst(1);
 x_val = (cos_t - Q)/M;
 k_val = int64(x_val);
-[CSPA, start, stop] = sm_gnrt_CSPA(cos_t, 0, Q, M, REF_CAT);
+[CSPA, INDEX] = sm_gnrt_CSPA(cos_t, 0, Q, M, REF_CAT);

@@ -1,9 +1,9 @@
 %% Add paths
 addpath(genpath('.\Prajwal'));
-clc
+
 %% Read Catalogues
-GD_CAT = readmatrix('.\Prajwal\Catalogues\Guide_Catalogue.csv'); % Read - Guide catalogue
-REF_CAT = readmatrix('.\Prajwal\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
+GD_CAT = readmatrix('.\Catalogues\Guide_Catalogue.csv'); % Read - Guide catalogue
+REF_CAT = readmatrix('.\Catalogues\Reference_Catalogue.csv'); % Read - Reference catalogue (which contains the star pairs)
 
 c_ANG_DST = REF_CAT(:,4); % Extract 'Angular distance' from Reference catalogue
 K_VEC = REF_CAT(:,5); % Extract K-Vector from Reference catalogue
