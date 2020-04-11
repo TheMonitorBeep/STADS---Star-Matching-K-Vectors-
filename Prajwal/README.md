@@ -6,7 +6,7 @@
 
 This repository contains the code for the **Star Matching** - block of STADS, based on the algorithm - *Brightness Independent 4-Star Matching Algorithm*, developed by the Tsinghua University.
 
-This repo is structured in the following way:
+This repository is structured in the following way:
 1. *..\Catalogues* - Folder contains all the required star catalogues
 1. *sm_main_4_str_mtch_algo.m* - Main code to run the star-matching algorithm
 1. *sm_gnrt_CSPA.m* - Function that generates the Candidate Star Pair Array for a given angular distance 
