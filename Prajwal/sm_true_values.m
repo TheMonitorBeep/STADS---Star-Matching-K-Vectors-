@@ -41,14 +41,15 @@ sz = size(REF_CAT); % Size of REF_CAT
 n_rw_RC = sz(1); % Number of star pairs (Number of rows - Reference catalogue)
 
 c_img_ang_dst = TRUE(:, 4);
-eps = 0.01; % Epsilon value
+eps = 0; % Epsilon value
 M = ( max(c_ANG_DST) - min(c_ANG_DST) + 2*E ) / ( n_rw_RC - 1 );
 Q = min(c_ANG_DST) - E - M ;
 
 check1 = zeros(1,6);
 for i = 1:6
-    [~, start, stop] = sm_gnrt_CSPA(c_img_ang_dst(i), eps, Q, M, REF_CAT);
+    [~, INDEX] = sm_gnrt_CSPA(c_img_ang_dst(i), eps, Q, M, REF_CAT);
     id = TRUE(i, 1);
+    start = INDEX(1); stop = INDEX(2);
     if (start<=id) && (id<=stop) % Check if the True Star ID lies between the range predicted by CSPA
         check1(i) = 1;
     end
